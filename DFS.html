@@ -1,0 +1,50 @@
+<script>
+class GRAPH
+{
+	constructor(d)
+	{
+		this.X = d;
+		this.adjacent = new Array(d);
+		for(var a = 0; a < d; a++)
+			this.adjacent[a] = [];
+	}
+	new_Edge(S, D)
+	{
+		this.adjacent[S].push(D);
+	}
+	dfs_Function(first, Visit)
+	{
+		Visit[first] = true;
+		document.write(first + " ");
+		for(var a of this.adjacent[first].values())
+		{
+			let m = a
+			if (!Visit[m])
+				this.dfs_Function(m, Visit);
+		}
+	}
+	Depth_FS(first)
+	{
+		let Visit = new Array(this.X);
+		for(let a = 0; a < this.X; a++)
+			Visit[a] = false;
+
+		this.dfs_Function(first, Visit);
+	}
+}
+
+G = new GRAPH(5);
+
+G.new_Edge(0, 1);
+G.new_Edge(0, 2);
+G.new_Edge(1, 3);
+G.new_Edge(2, 3);
+G.new_Edge(3, 2);
+G.new_Edge(3, 3);
+
+document.write("Depth-First-Search(starting from vertex 0)<br>");
+
+G.Depth_FS(0);
+
+
+</script>
